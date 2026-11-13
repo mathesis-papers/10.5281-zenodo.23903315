@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this work, cite it."
+title: "A counterexample to the Shannon conjecture following Eq. (69) in Tarabunga et al., Section V.C"
+authors:
+  - name: "Haobo Ma"
+  - name: "Wenlin Zhang"
+date-released: "2026-11-05"
+version: "1"
+url: "https://mathesis-omega-research.apps.chrono-ai.fun/papers/tarabunga-frau-haug-tirrito-piroli-2025-shannon-branch-bound?version=1"
+doi: "10.5281/zenodo.23903316"
+license: "CC-BY-4.0"

@@ -1,0 +1,162 @@
+{
+  "status": "pass",
+  "coefficient_order": "000,001,010,011,100,101,110,111",
+  "signed_coefficients": [
+    1,
+    0,
+    2,
+    -1,
+    1,
+    0,
+    0,
+    1
+  ],
+  "normalization_squared": 8,
+  "signed_walsh": [
+    4,
+    4,
+    0,
+    0,
+    0,
+    4,
+    0,
+    -4
+  ],
+  "absolute_walsh": [
+    6,
+    2,
+    -2,
+    2,
+    2,
+    2,
+    -2,
+    -2
+  ],
+  "p": [
+    "1/4",
+    "1/4",
+    "0",
+    "0",
+    "0",
+    "1/4",
+    "0",
+    "1/4"
+  ],
+  "q": [
+    "9/16",
+    "1/16",
+    "1/16",
+    "1/16",
+    "1/16",
+    "1/16",
+    "1/16",
+    "1/16"
+  ],
+  "strict_gap_identity": "(16*ln(2)-9*ln(3))/8 > 0",
+  "integer_certificate": {
+    "two_power_16": 65536,
+    "three_power_9": 19683
+  },
+  "positive_amplitude_phase": "x0*x1+x1*x2",
+  "fixed_R_real_phase_sign_pairs_checked": 4,
+  "tensor_product_copies_checked": 2,
+  "fixed_R_identity_enumeration": {
+    "quadratic_and_linear_choices": 64,
+    "minimum_entropy": "ln(4)",
+    "minimizers": 4,
+    "method": "Exact Gaussian-integer overlaps and rational logarithm bounds",
+    "scope": "The nonnegative three-qubit state; R=I3; all 8 quadratic and 8 linear choices"
+  },
+  "strictly_positive_example": {
+    "coefficients": [
+      100,
+      1,
+      200,
+      100,
+      100,
+      1,
+      1,
+      100
+    ],
+    "normalization_squared": 80003,
+    "q": [
+      "363609/640024",
+      "39601/640024",
+      "39601/640024",
+      "38809/640024",
+      "39601/640024",
+      "39601/640024",
+      "39601/640024",
+      "39601/640024"
+    ],
+    "p": [
+      "160801/640024",
+      "157609/640024",
+      "9/640024",
+      "1/640024",
+      "1/640024",
+      "160801/640024",
+      "1/640024",
+      "160801/640024"
+    ],
+    "certified_gap_lower": "137/1000",
+    "certified_gap_upper": "139/1000",
+    "illustrative_decimal_gap_lower": "0.137762101151021818",
+    "illustrative_decimal_gap_upper": "0.137762101151021818",
+    "entropy_interval_width_bound": "1e-50",
+    "logarithm_series_terms": 70
+  },
+  "integer_sum_fixed_quadratic_counterexample": {
+    "coefficients": [
+      1,
+      1,
+      1,
+      -1
+    ],
+    "normalization_squared": 4,
+    "Qprime": "0",
+    "c_zero_distribution": [
+      "1/4",
+      "1/4",
+      "1/4",
+      "1/4"
+    ],
+    "c_11_distribution": [
+      "1/2",
+      "0",
+      "0",
+      "1/2"
+    ],
+    "corrected_real_basis_distribution": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "entropy_comparison": "ln(4) > ln(2) for every Renyi index alpha>=0",
+    "corrected_reduction_shannon_choices_checked_at_three_qubits": 64
+  },
+  "padding_finite_checks_dimensions": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "written_proofs": [
+    "Shannon gap",
+    "Nonnegative-amplitude extension",
+    "Strictly positive existence by continuity",
+    "All dimensions N>=3",
+    "Renyi interval defined by the unique root alpha_star>1",
+    "Extensive Shannon defect",
+    "Real-amplitude reduction with explicit quadratic phase conversion",
+    "All-index fixed-R minimum for the witness",
+    "Collision-entropy lower bound for arbitrary affine supports",
+    "Coset-conditioned Shannon lower bound",
+    "All-index validity on coset-flat amplitudes and Figure 1 inputs"
+  ],
+  "lean_declaration": "D5.S3.Quantum.Magic.StabilizerAsymmetryShannonBoundRefutation.result",
+  "lean_scope": "Negation of the full-support Shannon bound, witnessed by the signed three-qubit state"
+}

@@ -1,0 +1,387 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,array}
+\usepackage[margin=1in]{geometry}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\F}{\mathbb F_2}
+\newcommand{\HH}{H}
+\title{A counterexample to the Shannon conjecture following Eq.~(69)\newline
+in Tarabunga et al., Section V.C}
+\author{Haobo Ma\\{\small ChronoAI Pte Ltd, Singapore}
+\and Wenlin Zhang\\{\small National University of Singapore}\\{\small ChronoAI Pte Ltd, Singapore}}
+\date{November 2, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The Shannon conjecture following Eq.~(69) in Section V.C of
+Tarabunga et al., arXiv:\allowbreak2411.05766v1, is false. An explicit three-qubit
+state has stabilizer-basis entropy $\log 4$, whereas the proposed
+absolute-amplitude lower bound is $\log16-(9/8)\log3>\log4$.
+The same construction refutes the bound for nonnegative amplitudes,
+and continuity gives strictly positive examples. It extends to every
+$N\ge3$ and to a range of R\'enyi indices containing one.
+The collision entropy of the comparison distribution remains a valid
+Shannon lower bound for arbitrary affine supports. For amplitudes of constant
+modulus on each affine coset, the original bound holds at every R\'enyi index;
+this includes the source's Figure~1 product states.
+\end{abstract}
+
+\section{The conjecture and its specialization}
+Tarabunga, Frau, Haug, Tirrito and Piroli conjecture the Shannon extension
+of their branch-and-bound inequality after Eq.~(69),
+Section V.C of arXiv:2411.05766v1~\cite{posing}: the equation is on p.~9
+and the explicit Shannon conjecture is on p.~10.
+For a fixed binary support matrix $R$, it asserts
+\begin{equation}\label{eq:conjecture}
+ \min_{Q',c}\HH(p_{Q',c,R})\ \ge\ \HH(q_R).
+\end{equation}
+Here $Q'$ is strictly upper triangular, $c$ is binary, and
+$q_R$ is obtained by replacing the computational amplitudes of the state
+by their absolute values and setting $Q'=c=0$.
+The source proves the corresponding inequality for integer
+R\'enyi index greater than one. The journal version~\cite{journal}
+retains the conjecture in Section~5.3, after Eq.~(74).
+Unless stated otherwise, equation and appendix locators here refer to
+the specified arXiv version.
+We use natural logarithms and $0\log0=0$.
+
+It suffices to take full support, $k=N$ and $R=I_N$.
+For $d,x\in\F^N$ define the orthonormal stabilizer basis
+\begin{equation}\label{eq:basis}
+ b_{Q',c,d}(x)=2^{-N/2}(-1)^{d\cdot x+x^TQ'x}i^{\sum_j c_jx_j}.
+\end{equation}
+The dot product and quadratic exponent are binary; the exponent of $i$
+is an ordinary integer sum. Orthogonality follows by summing the
+characters $(-1)^{(d+e)\cdot x}$; the other factors have modulus one.
+This is the integer-sum convention of~\cite{lean}. Interpreting the
+source's $c^Tx$ as a binary-field dot product instead gives a parity
+exponent. Section~\ref{sec:real} gives the quadratic relabeling between
+these parametrizations; the $c=0$ counterexample is identical in both.
+For a normalized amplitude vector $\psi$, set
+$p_{Q',c}(d)=|\sum_x\overline{b_{Q',c,d}(x)}\psi(x)|^2$
+and $q(d)=|\sum_xb_{0,0,d}(x)|\psi(x)||^2$.
+Thus $q$ and $p_{0,0}$ are squared Walsh transforms of $|\psi|$ and $\psi$.
+
+\section{An exact counterexample}
+The signed witness below is encoded in the pinned Lean source~\cite{lean},
+whose declaration \texttt{result} refutes the full-support Shannon bound.
+We give its entropy calculation and consequences explicitly.
+\begin{theorem}\label{thm:main}
+In the computational order $000,001,\ldots,111$, let
+\[
+ \psi=\frac1{\sqrt8}(1,0,2,-1,1,0,0,1).
+\]
+For $R=I_3$ and $Q'=c=0$, the comparison and overlap distributions satisfy
+\[
+ q=\frac1{16}(9,1,1,1,1,1,1,1),\qquad
+ p=\frac14(1,1,0,0,0,1,0,1).
+\]
+Consequently \eqref{eq:conjecture} is false.
+\end{theorem}
+\begin{proof}
+The squared coefficients sum to eight. If $W_{d,x}=(-1)^{d\cdot x}$,
+direct integer multiplication gives
+\begin{align*}
+ W(1,0,2,-1,1,0,0,1)^T&=(4,4,0,0,0,4,0,-4)^T,\\
+ W(1,0,2,1,1,0,0,1)^T&=(6,2,-2,2,2,2,-2,-2)^T.
+\end{align*}
+The overlaps are these entries divided by eight, proving the formulas.
+The entropies are
+\[
+ \HH(p)=\log4,\qquad
+ \HH(q)=\log16-\frac98\log3.
+\]
+Their difference is
+\begin{equation}\label{eq:gap}
+ \HH(q)-\HH(p)=\frac18\log\frac{2^{16}}{3^9}>0,
+ \qquad 65536>19683.
+\end{equation}
+Since the minimum in \eqref{eq:conjecture} is at most $\HH(p)$,
+one admissible basis suffices for the contradiction.
+\end{proof}
+The gap is approximately $0.1503555364$ nats, or $0.2169171867$ bits.
+The example establishes failure of the proposed lower bound;
+it does not assert a value for the minimization over all support matrices $R$.
+
+\begin{corollary}\label{cor:positive}
+The Shannon lower bound fails even for nonnegative amplitudes,
+and also for some strictly positive amplitudes.
+\end{corollary}
+\begin{proof}
+Put $a=|\psi|$ and take $c=0$ with quadratic phase
+$x^TQ'x=x_0x_1+x_1x_2$. On the support of $a$, its sign is negative
+at $011$ and positive at the other four occupied strings.
+Thus $(-1)^{x^TQ'x}a(x)=\psi(x)$, so this basis has exactly the
+distribution $p$ of Theorem~\ref{thm:main}, while its comparison is $q$.
+For strict positivity, replace the three zero coefficients of $a$ by
+$\varepsilon>0$ and normalize. Both distributions depend continuously
+on $\varepsilon$, and so does entropy because $-u\log u$ extends
+continuously to $u=0$. The strictly positive gap at $\varepsilon=0$
+therefore persists for all sufficiently small positive $\varepsilon$.
+\end{proof}
+
+An explicit strictly positive instance is
+\begin{equation}\label{eq:strict}
+ a_+=\frac1{\sqrt{80003}}(100,1,200,100,100,1,1,100).
+\end{equation}
+With the same quadratic phase, the integer Walsh vectors for the comparison
+and overlap distributions are, respectively,
+\[
+ (603,199,-199,197,199,199,-199,-199),\quad
+ (401,397,3,-1,1,401,-1,-401).
+\]
+Squaring each entry and dividing by $8\cdot80003$ specifies both
+distributions exactly. The finite check in \texttt{verify.py} certifies
+$137/1000<\HH(q)-\HH(p)<139/1000$ by rational logarithm bounds.
+For $1\le r\le2$ it uses
+\[
+ \log r=2\sum_{j=0}^{L-1}\frac{t^{2j+1}}{2j+1}+E_L,
+ \quad t=\frac{r-1}{r+1},\quad
+ 0\le E_L\le\frac{2t^{2L+1}}{(2L+1)(1-t^2)},
+\]
+with $L=70$ and reduction by powers of two.
+
+\begin{corollary}\label{cor:extensions}
+Counterexamples exist for every $N\ge3$. For the distributions in
+Theorem~\ref{thm:main}, $S_\alpha(q)>S_\alpha(p)$ holds exactly for
+$0\le\alpha<\alpha_*$, where $\alpha_*>1$ is the unique root above one of
+\begin{equation}\label{eq:root}
+ (9/4)^{\alpha_*}+7\,4^{-\alpha_*}=4.
+\end{equation}
+Here $S_0$ is log support size and $S_1=\HH$;
+numerically $\alpha_*\simeq1.262623$.
+No dimension-independent additive correction repairs the Shannon bound.
+\end{corollary}
+\begin{proof}
+Tensor $\psi$ with $|0\rangle^{\otimes(N-3)}$ and use the product Walsh
+basis. Both outcome distributions acquire a uniform factor of size
+$2^{N-3}$, adding $(N-3)\log2$ to each R\'enyi entropy, including
+indices zero and one. The gap is unchanged.
+Strictly positive examples in every such dimension follow by tensoring
+$a_+$ from \eqref{eq:strict} with $|+\rangle^{\otimes(N-3)}$ instead:
+the extra computational amplitudes are positive and the extra Walsh
+outcome is a point mass, so the entropy gap is unchanged.
+
+For $\alpha>0$, $\alpha\ne1$, the difference of power sums has the sign of
+$g(\alpha)=(9/4)^\alpha+7\,4^{-\alpha}-4$.
+This function is strictly convex, $g(0)=4$, $g(1)=0$,
+and $g(2)=3/2>0$. Moreover
+$g'(1)=(9\log3-16\log2)/2<0$ by \eqref{eq:gap}.
+Strict convexity gives exactly one further root $\alpha_*\in(1,2)$,
+with $g>0$ below one, $g<0$ between one and $\alpha_*$,
+and $g>0$ above $\alpha_*$. Division by $1-\alpha$ in
+$S_\alpha(r)=\log(\sum_dr(d)^\alpha)/(1-\alpha)$ gives the stated signs.
+At zero the support sizes are eight and four; at one use Theorem~\ref{thm:main}.
+Finally, tensoring $b$ copies gives $p^{\otimes b}$ and $q^{\otimes b}$
+in an admissible product basis, with Shannon gap $b\delta$, where
+$\delta$ is \eqref{eq:gap}. Thus no universal constant, or even an
+$o(N)$ term, can bound the defect in dimension $N=3b$.
+The same amplification applies to the strictly positive example.
+\end{proof}
+
+\section{The real-amplitude reduction}
+\label{sec:real}
+Appendix C.2 of~\cite{posing} reduces global minimization to $c=0$
+by pairing complex overlaps and comparing them with real overlaps.
+In the integer-sum convention of \eqref{eq:basis}, that argument
+requires a quadratic phase conversion. To see why, consider the real
+two-qubit state $\eta=(1,1,1,-1)/2$, with $Q'=0$ and $R=I_2$.
+At $c=(0,0)$, the outcome distribution is uniform on four points;
+at $c=(1,1)$, it is $(1/2,0,0,1/2)$.
+Their R\'enyi entropies are $\log4$ and $\log2$ for every $\alpha\ge0$.
+Thus the integer-sum fixed-$Q'$ analogue of (C3) is false.
+This is a parametrization distinction, not a counterexample to the
+binary-parity form of (C3). The global reduction to real bases has the
+following complete proof in the integer-sum convention.
+
+\begin{proposition}\label{prop:real}
+For a real amplitude vector and fixed $R$, the minimum over $(Q',c)$
+is attained at $c=0$, for every $0\le\alpha\le\infty$.
+More precisely, define the strictly upper-triangular matrix
+$(B_c)_{ij}=c_ic_j$ for $i<j$. Then
+\[
+ S_\alpha(p_{Q'+B_c,0,R})\le S_\alpha(p_{Q',c,R}).
+\]
+\end{proposition}
+\begin{proof}
+For binary $x$, let $s=\sum_jc_jx_j$ as an integer.
+Since $\lfloor s/2\rfloor\equiv\binom{s}{2}\pmod2$,
+\[
+ (-i)^s=(-1)^{x^TB_cx}(-i)^{c\cdot x},
+\]
+where the last exponent $c\cdot x$ is reduced to zero or one.
+If $c=0$, the claim is equality. Otherwise pair each diagonal label $d$
+with $d+c$, separately in each coset $t$. After absorbing
+$(-1)^{x^TB_cx}$ into $Q'$, split the real Walsh sum into its even- and
+odd-$c\cdot x$ parts, denoted $\beta$ and $\gamma$, including the
+factor $2^{-k/2}$. The original complex overlaps are
+$\beta-i\gamma$ and $\beta+i\gamma$, giving paired probabilities
+\[
+ (\beta^2+\gamma^2,\,\beta^2+\gamma^2),
+\]
+whereas the adjusted real basis has
+\[
+ ((\beta+\gamma)^2,\,(\beta-\gamma)^2).
+\]
+The pairs have the same sum. The second pair is at least as imbalanced:
+convexity of $u^\alpha$ for $\alpha>1$ gives a larger power sum,
+and concavity for $0<\alpha<1$ gives a smaller one.
+For $\alpha=1$, concavity of $-u\log u$ gives smaller entropy;
+for $\alpha=0$, the support cannot increase. Summing over all pairs
+and using the sign of $1-\alpha$ proves the inequality.
+At $\alpha=\infty$, the largest entry of each real pair is at least
+as large as either entry of the equal complex pair.
+Each adjusted $Q'+B_c$ is admissible. Since $c=0$ is already an allowed
+choice, the two global minima are equal.
+\end{proof}
+In particular, an imaginary linear phase cannot simply be discarded while
+holding the quadratic phase fixed; its parity contributes $B_c$.
+If the exponent of $i$ is instead defined as binary parity from the outset,
+this quadratic adjustment is already absorbed in the parametrization.
+
+\begin{corollary}\label{cor:minimum}
+For $a=|\psi|$ from Theorem~\ref{thm:main}, and every
+$0\le\alpha\le\infty$,
+\[
+ \min_{Q',c} S_\alpha(p^a_{Q',c,I_3})
+ =\min\{\log4,S_\alpha(q)\}.
+\]
+\end{corollary}
+\begin{proof}
+Proposition~\ref{prop:real} reduces the minimum to $c=0$.
+On the occupied strings, each quadratic phase yields coefficients
+$(1,0,2,s,1,0,0,t)/\sqrt8$, with $s,t\in\{1,-1\}$;
+every sign pair occurs. If $s=t$, the squared Walsh transform is a
+permutation of $q$; if $s=-t$, it is uniform on four points.
+These four integer transforms determine the displayed minimum.
+\end{proof}
+
+\section{A valid Shannon lower bound}
+The integer-index argument in Appendix C.1 of~\cite{posing} gives a
+replacement that does not require the Shannon conjecture.
+\begin{proposition}\label{prop:safe}
+For every normalized state, support matrix $R$ of rank $k$, and
+admissible $Q',c$, one has
+\begin{equation}\label{eq:safe}
+ \HH(p_{Q',c,R})\ \ge\ -\log\sum_{d,t}q_R(d,t)^2.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Write $M=2^k$, choose one representative $t$ of each coset of
+$\operatorname{Im}R$, and put
+\[
+z_t(x)=(-1)^{x^TQ'x}(-i)^{\sum_jc_jx_j}\psi(Rx+t).
+\]
+Then $p(d,t)=M^{-1}|\sum_x(-1)^{d\cdot x}z_t(x)|^2$,
+while $q_R$ replaces $z_t$ by $|z_t|$.
+Character orthogonality, valid also at $k=0$, gives
+\begin{align*}
+ \sum_{d,t}p(d,t)^2
+ &=\frac1M\sum_t\sum_{x_1+x_2=x_3+x_4}
+ z_t(x_1)z_t(x_2)\overline{z_t(x_3)z_t(x_4)}\\
+ &\le\frac1M\sum_t\sum_{x_1+x_2=x_3+x_4}
+ |z_t(x_1)z_t(x_2)z_t(x_3)z_t(x_4)|
+ =\sum_{d,t}q_R(d,t)^2.
+\end{align*}
+The inequality is the triangle inequality; the left-hand sum is real
+and nonnegative. Both distributions are normalized, since the cosets
+partition the computational basis and each Walsh transform is unitary.
+Jensen's inequality for $-\log$ with weights $p(d,t)$ yields
+$\HH(p)\ge-\log\sum p(d,t)^2$, proving \eqref{eq:safe}.
+\end{proof}
+The same expansion for integer $m\ge2$ has factor $M^{1-m}$ and
+constraint $x_1+\cdots+x_m=y_1+\cdots+y_m$.
+Taking absolute values proves $\sum p^m\le\sum q_R^m$, hence
+$S_m(p)\ge S_m(q_R)$, the source's integer-index result.
+For Theorem~\ref{thm:main}, the safe bound is $\log(32/11)$,
+because $\sum q^2=11/32$. Thus a Shannon branch can be pruned safely
+when this collision-entropy bound exceeds the incumbent entropy;
+the larger conjectural quantity $\HH(q_R)$ is not a universal certificate.
+
+There is a stronger coset-conditioned version. Let
+$w_t=\sum_d p(d,t)=\sum_d q_R(d,t)$ and
+$\widehat q_t(d)=q_R(d,t)/w_t$ for $w_t>0$.
+The same collision argument within each coset and the Shannon chain rule give
+\begin{equation}\label{eq:conditioned}
+ \HH(p)\ge \HH(w)+\sum_{t:w_t>0}w_tS_2(\widehat q_t)
+ \ge S_2(q_R).
+\end{equation}
+For the last inequality, put $C_t=\sum_dq_R(d,t)^2$.
+The middle expression is $-\sum_tw_t\log(C_t/w_t)$, which is at least
+$-\log\sum_tC_t$ by Jensen's inequality. Zero-mass cosets contribute zero.
+
+\begin{proposition}\label{prop:flat}
+If $|\psi(Rx+t)|=a_t$ is constant in $x$ on every affine coset, then
+$S_\alpha(p_{Q',c,R})\ge S_\alpha(q_R)$ for every
+$0\le\alpha\le\infty$ and every $Q',c$.
+\end{proposition}
+\begin{proof}
+Character orthogonality gives $q_R(d,t)=w_t\mathbf1_{\{d=0\}}$,
+where $w_t=2^ka_t^2$, while $\sum_dp(d,t)=w_t$.
+For $\alpha>1$, splitting a mass gives
+$\sum_dp(d,t)^\alpha\le w_t^\alpha$; for $0<\alpha<1$ the
+inequality reverses. Summing and dividing the logarithm by $1-\alpha$
+proves the assertion. At $\alpha=1$, use
+$\HH(p)=\HH(w)+\sum_tw_t\HH(p(\cdot\mid t))\ge\HH(w)=\HH(q_R)$.
+At zero the support cannot shrink when masses are split; at infinity
+$\max_{d,t}p(d,t)\le\max_tw_t$.
+\end{proof}
+The normalized Figure~1 states of~\cite{posing},
+$2^{-N/2}(|0\rangle+e^{i\theta}|1\rangle)^{\otimes N}$ with
+$\theta=\pi/4,\pi/8$, have globally constant amplitude modulus.
+For every rank-$k$ support matrix, their comparison entropy is
+$(N-k)\log2$. Thus the original pruning bound is valid on these
+particular inputs at every index. This conclusion concerns the mathematical
+bound, not the numerical implementation or any further transformations.
+
+\section{Coverage and verification scope}
+The neighboring claims have distinct scopes:
+\begin{center}\small
+\begin{tabular}{@{}p{.42\linewidth}p{.52\linewidth}@{}}
+\toprule
+Source item in arXiv:2411.05766v1 & Conclusion here\\
+\midrule
+Section V.C, conjecture after (69), $\alpha=1$ & Refuted by Theorem~\ref{thm:main}.\\
+Same bound at nearby indices and $\alpha=0$ & Refuted for $0\le\alpha<\alpha_*$ by Corollary~\ref{cor:extensions}.\\
+Section V.C, Figure~1 product-state families & The original bound is valid at every index by Proposition~\ref{prop:flat}.\\
+Appendix C.2, final positive-amplitude observation & At $\alpha=1$, $Q'=0$ need not minimize: Corollary~\ref{cor:positive}, including strictly positive examples. The integer-index statement is preserved.\\
+Section V.C and Appendix C.1, integer $\alpha>1$ & Preserved; the moment proof also gives Proposition~\ref{prop:safe}.\\
+Appendix C.2, real-amplitude $c=0$ reduction, Eq.~(C3) & Preserved; Proposition~\ref{prop:real} gives the integer-sum phase conversion $Q'\mapsto Q'+B_c$. Its fixed-$Q'$ integer-sum analogue fails for $\eta$.\\
+Sections II.D and V.C, additivity discussions; Section VI, questions on strong monotonicity & Not covered. The counterexample alone decides neither.\\
+\bottomrule
+\end{tabular}
+\end{center}
+The pinned \href{https://github.com/the-omega-institute/trureturing/blob/122c987d276498783de7d873378a28b27ced8761/D5/S3/Quantum/Magic/StabilizerAsymmetryShannonBoundRefutation.lean}{Lean source}
+defines the full-support distributions in \eqref{eq:basis} and its declaration
+\texttt{result} proves the negation of the full-support Shannon bound,
+using the signed witness of Theorem~\ref{thm:main}.
+Corollaries~\ref{cor:positive}, \ref{cor:extensions} and~\ref{cor:minimum},
+Propositions~\ref{prop:real}, \ref{prop:safe} and~\ref{prop:flat}, and
+\eqref{eq:conditioned} have written proofs here.
+The accompanying finite checks establish the displayed transforms,
+the strictly positive instance \eqref{eq:strict}, and, by all 64 choices
+of $(Q',c)$, the fixed-$R=I_3$ minimum $\log4$ for $|\psi|$.
+These checks do not minimize over other support matrices.
+
+\begin{thebibliography}{3}
+\bibitem{posing} P.~S.~Tarabunga, M.~Frau, T.~Haug, E.~Tirrito and L.~Piroli,
+\emph{A nonstabilizerness monotone from stabilizerness asymmetry},
+\href{https://arxiv.org/abs/2411.05766v1}{arXiv:2411.05766v1} (8 November 2024),
+Section V.C, pp.~9--10, Eq.~(69) and the subsequent Shannon conjecture;
+Appendix C.1--C.2, pp.~15--16.
+\bibitem{journal} P.~S.~Tarabunga, M.~Frau, T.~Haug, E.~Tirrito and L.~Piroli,
+\emph{A nonstabilizerness monotone from stabilizerness asymmetry},
+Quantum Science and Technology \textbf{10}(4), 045026 (2025),
+\href{https://doi.org/10.1088/2058-9565/adfd0d}{doi:10.1088/2058-9565/adfd0d}.
+\bibitem{lean} Trureturing contributors,
+\emph{StabilizerAsymmetryShannonBoundRefutation},
+\href{https://github.com/the-omega-institute/trureturing/blob/122c987d276498783de7d873378a28b27ced8761/D5/S3/Quantum/Magic/StabilizerAsymmetryShannonBoundRefutation.lean}{source at commit \texttt{122c987d2764}};
+declaration \texttt{D5.S3.Quantum.Magic.}\\
+\texttt{StabilizerAsymmetryShannonBoundRefutation.result}.
+\end{thebibliography}
+\noindent\small\textcopyright\ 2026 Haobo Ma and Wenlin Zhang.
+Licensed under \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International (CC BY 4.0)}.
+\end{document}

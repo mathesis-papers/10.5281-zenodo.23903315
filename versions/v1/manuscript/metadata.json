@@ -1,0 +1,24 @@
+{
+  "id": "tarabunga-frau-haug-tirrito-piroli-2025-shannon-branch-bound",
+  "revision": 1,
+  "problem_ids": ["tarabunga-frau-haug-tirrito-piroli-2025-shannon-branch-bound"],
+  "topic": "The Shannon conjecture following Eq. (69), Section V.C, arXiv:2411.05766v1",
+  "title": "A counterexample to the Shannon conjecture following Eq. (69) in Tarabunga et al., Section V.C",
+  "creators": [
+    {"name": "Ma, Haobo", "affiliation": "ChronoAI Pte Ltd, Singapore"},
+    {"name": "Zhang, Wenlin", "affiliation": "National University of Singapore; ChronoAI Pte Ltd, Singapore"}
+  ],
+  "abstract": "The Shannon conjecture following Eq. (69) in Section V.C of Tarabunga et al., arXiv:2411.05766v1, is false. An explicit three-qubit state has stabilizer-basis entropy log 4, whereas the proposed absolute-amplitude lower bound is log 16 - (9/8) log 3 > log 4. The same construction refutes the bound for nonnegative amplitudes, and continuity gives strictly positive examples. It extends to every N >= 3 and to a range of Renyi indices containing one. The collision entropy of the comparison distribution remains a valid Shannon lower bound for arbitrary affine supports. For amplitudes of constant modulus on each affine coset, the original bound holds at every Renyi index; this includes the source's Figure 1 product states.",
+  "summary": "An exact three-qubit counterexample, positive-amplitude extensions, and a valid collision-entropy lower bound.",
+  "license": "cc-by-4.0",
+  "evidence_url": "https://github.com/the-omega-institute/trureturing/blob/122c987d276498783de7d873378a28b27ced8761/D5/S3/Quantum/Magic/StabilizerAsymmetryShannonBoundRefutation.lean",
+  "posing_source": "https://arxiv.org/abs/2411.05766v1",
+  "posing_locator": "arXiv v1: Section V.C, Eq. (69) on p. 9, explicit Shannon conjecture on p. 10; related Appendix C.1-C.2, pp. 15-16. Journal version: Section 5.3, conjecture following Eq. (74).",
+  "upstream_revision": "122c987d276498783de7d873378a28b27ced8761",
+  "verification_scope": {
+    "lean_declaration": "D5.S3.Quantum.Magic.StabilizerAsymmetryShannonBoundRefutation.result",
+    "lean_statement": "Negation of the full-support Shannon bound via the signed three-qubit witness",
+    "written_proofs": ["Nonnegative-amplitude extension", "Strictly positive existence", "All N >= 3", "Renyi interval below alpha_star", "Extensive Shannon defect", "Real-amplitude reduction with explicit quadratic phase conversion", "All-index fixed-R minimum for the witness", "Collision-entropy bound for arbitrary affine supports", "Coset-conditioned Shannon lower bound", "All-index validity on coset-flat amplitudes and Figure 1 inputs"],
+    "finite_checks": ["Integer Walsh transforms", "All 64 phase choices for the nonnegative three-qubit state at R=I3", "Rational entropy intervals for a strictly positive example", "Padding dimensions 3 through 8"]
+  }
+}
