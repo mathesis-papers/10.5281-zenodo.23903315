@@ -2,16 +2,16 @@
   "files": {
     "pdf": {
       "bytes": 91355,
-      "matches_public": null,
+      "matches_public": true,
       "path": "paper.pdf",
-      "public_sha256": null,
+      "public_sha256": "edaa13b040137f7972b377fd48e0d9ecd327de8902a12efcc552decbad37905b",
       "sha256": "edaa13b040137f7972b377fd48e0d9ecd327de8902a12efcc552decbad37905b"
     },
     "source": {
       "bytes": 15714,
-      "matches_public": null,
+      "matches_public": true,
       "path": "source.archive",
-      "public_sha256": null,
+      "public_sha256": "a7d626b93c374df5fcaa0e8cfd7fc25a3838ae2c65fa582b912e79e439b8649c",
       "sha256": "a7d626b93c374df5fcaa0e8cfd7fc25a3838ae2c65fa582b912e79e439b8649c"
     }
   },
@@ -38,6 +38,8 @@
     "license": "CC-BY-4.0",
     "msc": [],
     "pdf": {
+      "bytes": 91355,
+      "sha256": "edaa13b040137f7972b377fd48e0d9ecd327de8902a12efcc552decbad37905b",
       "url": "/api/v1/collected-papers/tarabunga-frau-haug-tirrito-piroli-2025-shannon-branch-bound/files/pdf?version=1"
     },
     "previous_version": null,
@@ -46,6 +48,8 @@
     "record": "tarabunga-frau-haug-tirrito-piroli-2025-shannon-branch-bound",
     "repository_name": "10.5281-zenodo.23903315",
     "source": {
+      "bytes": 15714,
+      "sha256": "a7d626b93c374df5fcaa0e8cfd7fc25a3838ae2c65fa582b912e79e439b8649c",
       "url": "/api/v1/collected-papers/tarabunga-frau-haug-tirrito-piroli-2025-shannon-branch-bound/files/source?version=1"
     },
     "title": "A counterexample to the Shannon conjecture following Eq. (69) in Tarabunga et al., Section V.C",
